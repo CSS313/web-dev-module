@@ -21,3 +21,20 @@ console.log(li[1])
 li[1].textContent = 'Hello 2'
 li[1].style.fontWeight = 'bold'
 li[1].style.backgroundColor = 'yellow'
+
+//-----------------------task-6---------------------------------
+
+const secondItem = document.querySelector('.list-group-item:nth-child(2)')
+secondItem.style.backgroundColor = 'green'
+
+const thirdItem = document.querySelector('.list-group-item:nth-child(3)')
+thirdItem.style.display = 'none'
+
+const secItem = document.querySelectorAll('li:nth-child(2)')
+console.log(secItem)
+secItem[0].style.color = 'green'
+
+const odd = document.querySelectorAll('li:nth-child(odd)')
+for (let i = 0; i < odd.length; i++) {
+    odd[i].style.backgroundColor = 'green'
+}
