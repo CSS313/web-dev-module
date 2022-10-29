@@ -2,6 +2,7 @@ var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var listItems = document.querySelectorAll('.list-group-item')
 var filter = document.getElementById('filter');
+var description = document.getElementById('description')
 
 
 // Form submit event
@@ -22,36 +23,48 @@ filter.addEventListener('keyup', filterItems);
 
 // Add item
 function addItem(e){
-  e.preventDefault();
+    e.preventDefault();
 
-  // Get input value
-  var newItem = document.getElementById('item').value;
+    // Get input value
+    var newItem = document.getElementById('item').value;
 
-  // Create new li element
-  var li = document.createElement('li');
+    // Get input value from description field
+    var desItem = description.value;
 
-  // Add class
-  li.className = 'list-group-item';
+    // Create new li element
+    var li = document.createElement('li');
 
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+    // Add class
+    li.className = 'list-group-item';
 
-  // Create del button element
-  var deleteBtn = document.createElement('button');
+    // Add text node with input value
+    li.appendChild(document.createTextNode(newItem));
 
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    // Create linebreak element
+    var linebreak = document.createElement("br");
 
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
+    // Add linebreak between two input text fields
+    li.appendChild(linebreak);
 
-  // Append button to li
-  li.appendChild(deleteBtn);
+    // Add text node with description input value
+    li.appendChild(document.createTextNode(desItem));
 
-  // Append li to list
-  itemList.appendChild(li);
+    // Create del button element
+    var deleteBtn = document.createElement('button');
 
-  addEditBtn(li)
+    // Add classes to del button
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+
+    // Append text node
+    deleteBtn.appendChild(document.createTextNode('X'));
+
+    // Append button to li
+    li.appendChild(deleteBtn);
+
+    // Append li to list
+    itemList.appendChild(li);
+
+    addEditBtn(li)
 }
 
 function addEditBtn(li) {
@@ -74,12 +87,12 @@ function addEditBtn(li) {
 
 // Remove item
 function removeItem(e){
-  if(e.target.classList.contains('delete')){
+    if(e.target.classList.contains('delete')){
     if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
+        var li = e.target.parentElement;
+        itemList.removeChild(li);
     }
-  }
+    }
 }
 
 // Filter Items
@@ -93,8 +106,11 @@ function filterItems(e){
     // Convert to an array
     Array.from(items).forEach(function(item){
       var itemName = item.firstChild.textContent;
-      if(itemName.toLowerCase().indexOf(text) != -1){
+      var desItemName = item.childNodes[2].textContent
+
+      if(itemName.toLowerCase().indexOf(text) != -1 || desItemName.toLowerCase().indexOf(text) != -1){
         item.style.display = 'block';
+        
       } else {
         item.style.display = 'none';
       }
