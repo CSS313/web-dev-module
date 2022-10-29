@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Document</title>
+
+    </head>
+
+    <body>
+
+        <form action="#" onsubmit="saveToLocalStorage(event)">
+
+            <label for="username">Name:</label><br>
+
+            <input type="text" id="username" name="username" value="" required><br><br>
+
+            <label for="email">Email:</label><br>
+
+            <input type="email" id="email" name="email" value="" required><br><br>
+
+            <label for="phone">Phone:</label><br>
+
+            <input type="tel" id="phone" name="phone" value="" required><br><br>
+
+            <label for="date">Time for Call:</label><br>
+
+    <input type="date" id="date" name="date">
+
+            <label for="appt"></label>
+
+            <input type="time" id="appt" name="appt"><br><br>
+
+            <input type="submit" value="GET A CALL">
+
+        </form>
+        <ul id="userdetails"></ul>
+
+        <script type="text/javascript">
+            function saveToLocalStorage(event) {
+                event.preventDefault()
+                const name = event.target.username.value
+                const email = event.target.email.value
+                const phone = event.target.phone.value
+                const date = event.target.date.value
+                const time = event.target.appt.value
+                
+                let formData = JSON.parse(localStorage.getItem('formData')) || []
+                formData.push({ name, email, phone, date, time })
+                localStorage.setItem('formData', JSON.stringify(formData))
+                
+                const usersArray = JSON.parse(localStorage.getItem('formData'))
+                showNewUser(usersArray)
+            }
+
+            function showNewUser(usersArray) {
+                const parentNode = document.getElementById('userdetails')
+                
+                for(let i = 0; i < usersArray.length; i++) {
+                    let userName = usersArray[i].name
+                    let userEmail = usersArray[i].email
+                    let userPhone = usersArray[i].phone
+                    let childHTML = `<li>${userName}  ${userEmail}  ${userPhone}</li>`
+
+                    parentNode.innerHTML += childHTML
+                }
+            }
+        </script>
+    </body>
+</html>
