@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <form action="#" onsubmit="saveToLocalStorage(event)">
+
+        <label for="username">Name:</label><br>
+
+        <input type="text" id="username" name="username" value="Chetan Singh" required<br><br>
+
+        <label for="email">Email:</label><br>
+
+        <input type="email" id="email" name="email" value="abc@example.com" required><br><br>
+
+        <label for="phone">Phone:</label><br>
+
+        <input type="tel" id="phone" name="phone" value="9876543210" required><br><br>
+
+        <label for="date">Time for Call:</label><br>
+
+  <input type="date" id="date" name="date">
+
+        <label for="appt"></label>
+
+        <input type="time" id="appt" name="appt"><br><br>
+
+        <input type="submit" value="GET A CALL">
+
+      </form>
+
+      <script>
+        function saveToLocalStorage(event) {
+            event.preventDefault()
+            const name = event.target.username.value
+            const email = event.target.email.value
+            const phone = event.target.phone.value
+            const date = event.target.date.value
+            const time = event.target.appt.value
+
+            localStorage.setItem("name", name)
+            localStorage.setItem("email", email)
+            localStorage.setItem("phonenumber", phone)
+            localStorage.setItem("date", date)
+            localStorage.setItem("time", time)
+        }
+        
+
+      </script>
+
+</body>
+
+</html>
