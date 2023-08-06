@@ -1,0 +1,38 @@
+on clicking edit button 
+    a new button save changes should appear in form
+        in editExpense function
+            add expense button should be disabled
+                select target button
+                make disabled property true on it
+            form fields should be filled with data of target list element
+
+            target div should disappear from screen
+
+            select target form element
+
+            create a new button save changes
+
+            add a class to it
+
+            add an event listener on click event which will call function saveChanges
+            
+            saveChanges is passed with event
+
+    
+   
+on clicking save changes
+    extract values from input fields and make an object from these
+    a put request should be sent to crudcrud with new expense object and id of old target expense object
+    data should be shown on screen
+    save changes button should disappear 
+    add expense button should be enabled again
+
+saveChanges(event, id) {
+    extract values from form
+    make new expense object from extracted values
+    put request to crudcrud
+        put('url/id', newExpenseObj)
+    save changes button should disappear
+    add expense button should be enabled again
+    call function showExpenses to show on screen
+}
