@@ -6,7 +6,6 @@ const addBtn = document.querySelector('#add-btn')
 const expenseList = document.querySelector('.expense-list')
 
 
-
 //Add event listeners
 document.addEventListener('DOMContentLoaded', getExpenses)
 addBtn.addEventListener('click', addExpense)
@@ -15,16 +14,15 @@ addBtn.addEventListener('click', addExpense)
 
 //Fuctions
 
-function getExpenses() {
-    axios.get("https://crudcrud.com/api/125aaa73a03f40d28c4c50029da27130/expenseData")
-        .then((response) => {
+async function getExpenses() {
+    const response = await axios.get("https://crudcrud.com/api/f06d6c8f923f427ea4d5be77f19af584/expenseData")
+         try {
             for(let i = 0; i < response.data.length; i++) {
                 showExpenses(response.data[i])
-            }
-        })
-        .catch((error) => {
+            }    
+         } catch (error) {
             console.log(error)
-        })
+         }
 }
 
 function addExpense(event) {
@@ -39,7 +37,7 @@ function addExpense(event) {
     const description = descriptionInput.value
     const expenseType = expenseTypeInput.value
 
-    //Create object of data to be stored in local storage
+    //Create object of data to be stored in crudcrud
     const expenseObj = {
         // id,
         expense,
@@ -47,10 +45,7 @@ function addExpense(event) {
         expenseType
     }
 
-    saveToCrudCrud(expenseObj)
-    
-
-   
+    saveToCrudCrud(expenseObj)  
 }
 
 function showExpenses(expenseObj) {
@@ -105,34 +100,25 @@ function showExpenses(expenseObj) {
 }
 
 
-function saveToCrudCrud(expenseObj) {
-    // let expenseData = JSON.parse(localStorage.getItem('expenseData')) || []
-    // expenseData.push(expenseObj)
-    // localStorage.setItem('expenseData', JSON.stringify(expenseData))
-    axios.post("https://crudcrud.com/api/125aaa73a03f40d28c4c50029da27130/expenseData", expenseObj)
-        .then((response) => {
-            // console.log(response)
-            showExpenses(response.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+async function saveToCrudCrud(expenseObj) {
+    try {
+        const response = await axios.post("https://crudcrud.com/api/f06d6c8f923f427ea4d5be77f19af584/expenseData", expenseObj)
 
+        showExpenses(response.data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-
-
-function deleteExpense(event,id) {
-    
-    axios.delete(`https://crudcrud.com/api/125aaa73a03f40d28c4c50029da27130/expenseData/${id}`)
-        .then((response) => {
-            
-            const toRemove = event.target.parentElement
-            toRemove.remove()
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+async function deleteExpense(event, id) {
+    try {
+        const response = await axios.delete(`https://crudcrud.com/api/f06d6c8f923f427ea4d5be77f19af584/expenseData/${id}`)
+       
+        const toRemove = event.target.parentElement
+        toRemove.remove()
+    } catch (error) {
+        console.log(error)
+    }
     
 }
 
@@ -141,12 +127,12 @@ function editExpense(event, expenseObj) {
     //Populate input fields with corresponding values from required object
     expenseInput.value = expenseObj.expense
     descriptionInput.value = expenseObj.description
-    expenseTypeInput.value = expenseObj.expenseTypeInput
+    expenseTypeInput.value = expenseObj.expenseType
 
-    //Delete required object from local storage
+    //Delete specified object from crudcrud's expenseData resource
     deleteExpense(event, expenseObj._id)
 
     //Remove required object's data from screen
-    const toRemove = event.target.parentElement
-    toRemove.remove()
+    // const toRemove = event.target.parentElement
+    // toRemove.remove()
 }

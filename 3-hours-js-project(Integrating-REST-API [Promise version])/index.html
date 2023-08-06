@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul { 
+            padding: 0px;
+        }
+        li {
+            margin: 2rem;
+            float: left;
+            width: auto;
+            list-style: outside none none;
+        }
+        button{
+            margin: 2rem;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js" integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <!-- <form action="#" onsubmit="saveToLocalStorage(event)"> -->
+        <form action="#">
+        <label for="expenses">Expenses:</label><br>
+        <input id="expenses" type="number" name="expenses" value="" ><br><br>
+        <label for="description">Description:</label><br>
+        <input id="description" type="text" name="description" value="" ><br><br>
+        <div>
+            <label for="type">Choose Expense Type:</label>
+            <select name="expense-type" id="expense-type" required>
+                <option value="">--Select Expense Type--</option>
+                <option value="Bills">Bills</option>
+                <option value="Recharge">Recharge</option>
+                <option value="Travel">Travel</option>
+                <option value="Food">Food</option>
+            </select><br><br>
+        </div>
+       
+        <!-- <button type="button" onclick="saveToLocalStorage(event)">Add Expenses</button> -->
+        <input id="add-btn" type="submit" value="Add Expenses">
+    </form>
+    <div class="expense-container">
+        <ul class="expense-list">
+           
+            
+            
+        </ul>
+    </div>
+    
+    <script type="text/javascript" src="task.js"></script>
+</body>
+</html>
